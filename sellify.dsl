@@ -45,13 +45,13 @@ workspace {
     views {
         systemContext "sellify" {
             include *
-            autolayout rl
         }
         styles {
             element "Person" {
                 color #ffffff
                 fontSize 22
                 shape Person
+                background #0097b2
             }
             element "Customer" {
                 background #08427b
@@ -60,8 +60,9 @@ workspace {
                 background #999999
             }
             element "Software System" {
-                background #1168bd
+                background #00bcd4
                 color #ffffff
+                shape RoundedBox
             }
             element "Existing System" {
                 background #999999
