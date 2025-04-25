@@ -1,56 +1,54 @@
 workspace {
 
     model {
-    
-        backoffice = person "Backoffice" {
-            description "Interne Mitarbeitende für Authoring und Prüfung"
-        }
 
+        backoffice = person "Backoffice" {
+            description "Internal staff for authoring and reviewing"
+        }
 
         sellify = softwareSystem "Sellify" {
-            description "Zentrales System zum Produktmanagement und Verkauf"
+            description "Central system for product management and sales"
         }
-    
-        companyShop = softwareSystem "Bestehendes Shopsystem" "" "Existing System" {
-            description "Vorhandenes Shopsystem zur Platzierung und zum Verkauf von Produkten"
+
+        companyShop = softwareSystem "Existing Shop System" "" "Existing System" {
+            description "Existing shop system for placing and selling products"
         }
 
         paymentGateway = softwareSystem "Payment Gateway" "" "Existing System" {
-            description "Zahlungsabwicklung für Verkäufe"
+            description "Handles payment processing for sales"
         }
 
-        privateSeller = person "Private Verkäufer" {
-            description "Privatpersonen, die Produkte verwalten"
-        }
-        
-        buyer = person "Käufer" {
-            description "Kunde des Online-Shops"
-        }
-        
-        external = softwareSystem "Externe Shops" "" "Existing System" {
-            description "Firmen, die Produkte importieren und verwalten"
+        privateSeller = person "Private Seller" {
+            description "Private individuals who manage products"
         }
 
-        external -> sellify "Onboarding, Produkte importieren, Produkte verwalten"
+        buyer = person "Buyer" {
+            description "Customer of the online shop"
+        }
 
-        backoffice -> sellify "Authoring und Prüfung"
-        privateSeller -> sellify "Onboarding, Produkte verwalten"
-        sellify -> companyShop "Produkte platzieren"
-        companyShop -> sellify "Produkte verkauft"
-        sellify -> paymentGateway "Bezahlung, Verkauf"
-        buyer -> companyShop "Einkaufen"
+        external = softwareSystem "External Shops" "" "Existing System" {
+            description "Companies that import and manage products"
+        }
+
+        external -> sellify "Onboarding, import products, manage products"
+        backoffice -> sellify "Authoring and reviewing"
+        privateSeller -> sellify "Onboarding, manage products"
+        sellify -> companyShop "Place products"
+        companyShop -> sellify "Report sales"
+        sellify -> paymentGateway "Payment, sales"
+        buyer -> companyShop "Shopping"
     }
 
     views {
         systemContext "sellify" {
             include *
+            autolayout rl
         }
         styles {
             element "Person" {
                 color #ffffff
                 fontSize 22
                 shape Person
-                background #0097b2
             }
             element "Customer" {
                 background #08427b
@@ -59,9 +57,8 @@ workspace {
                 background #999999
             }
             element "Software System" {
-                background #00bcd4
+                background #1168bd
                 color #ffffff
-                shape RoundedBox
             }
             element "Existing System" {
                 background #999999
@@ -90,4 +87,3 @@ workspace {
         }
     }
 }
-
